@@ -1,9 +1,9 @@
 package service
 
 import (
-	"mall/common"
-	"mall/global"
-	"mall/models/app"
+	"github.com/892294101/jxlife/server/common"
+	"github.com/892294101/jxlife/server/global"
+	"github.com/892294101/jxlife/server/models/app"
 )
 
 type AppAddressService struct {
