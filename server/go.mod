@@ -1,4 +1,4 @@
-module github.com/892294101/jxlife
+module github.com/892294101/jxlife/server
 
 go 1.17
 
