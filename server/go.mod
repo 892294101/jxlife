@@ -1,4 +1,4 @@
-module jxlife
+module github.com/892294101/jxlife
 
 go 1.17
 
@@ -14,6 +14,7 @@ require (
 )
 
 require (
+	github.com/892294101/jxlife v0.0.0-20230621031256-f3be1e6f1c5d // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
