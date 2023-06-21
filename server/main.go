@@ -1,6 +1,6 @@
 package main
 
-import "mall/initialize"
+import "github.com/892294101/jxlife/server/initialize"
 
 func main() {
 	initialize.Run()
