@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/classify/index",
+    "pages/buycart/index",
     "pages/order/index",
     "pages/order/confirm/index",
     "pages/goods/index",
@@ -25,6 +27,14 @@
       {
         "pagePath": "pages/home/index",
         "text": "首页"
+      },
+      {
+        "pagePath": "pages/classify/index",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/buycart/index",
+        "text": "购物车"
       },
       {
         "pagePath": "pages/order/index",

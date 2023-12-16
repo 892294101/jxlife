@@ -63,6 +63,7 @@ func (o *WebOrder) GetOrderList(context *gin.Context) {
 	response.SuccessPage("查询成功", productList, rows, context)
 }
 
+// GetOrderDetail 获取订单详情信息
 func (o *WebOrder) GetOrderDetail(context *gin.Context) {
 	var param web.OrderDetailParam
 	if err := context.ShouldBind(&param); err != nil {

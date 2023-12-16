@@ -58,7 +58,7 @@ func (o *WebOrderService) GetList(param web.OrderListParam) ([]web.OrderList, in
 	return orderList, rows
 }
 
-// 获取订单详情
+// GetDetail 获取订单详情
 func (o *WebOrderService) GetDetail(param web.OrderDetailParam) (od web.OrderDetail) {
 	var order web.Order
 	var address web.Address
@@ -110,7 +110,7 @@ func (o *WebOrderService) GetDetail(param web.OrderDetailParam) (od web.OrderDet
 	return orderDetail
 }
 
-// 更新订单
+// Update 更新订单
 func (o *AppOrderService) Update(param app.OrderUpdateParam) int64 {
 	order := web.Order{
 		Id:      param.Id,
@@ -196,7 +196,10 @@ func (o *AppOrderService) GetList(param app.OrderQueryParam) []app.OrderList {
 		// 查询商品信息
 		goodsIds := make([]uint, 0)
 		goodsIdsCount := map[int64]int{}
+
+		fmt.Println("o.GoodsIdsCount: ", o.GoodsIdsCount)
 		for _, gidCount := range strings.Split(o.GoodsIdsCount, ",") {
+			fmt.Println("gidCount: ", gidCount)
 			ic := strings.Split(gidCount, ":")
 			id, _ := strconv.Atoi(ic[0])
 			count, _ := strconv.Atoi(ic[1])

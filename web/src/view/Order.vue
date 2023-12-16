@@ -95,7 +95,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="title" label="标题">
+          <el-table-column prop="title" label="标题" width="240">
             <template #default="scope">
               <div style="font-size: 10px;line-height: 15px;">{{scope.row.title}}</div>
             </template>

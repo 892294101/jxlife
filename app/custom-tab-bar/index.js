@@ -7,7 +7,20 @@ Component({
       icon: '/assets/home-o.png',
       activeIcon: '/assets/home.png',
       navTo: "/pages/home/index",
-    },{ 
+    },
+    { 
+      name: '分类',
+      icon: '/assets/classify-o.png',
+      activeIcon: '/assets/classify.png',
+      navTo: "/pages/classify/index",
+    },
+    { 
+      name: '购物车',
+      icon: '/assets/buy-o.png',
+      activeIcon: '/assets/buy.png',
+      navTo: "/pages/buycart/index",
+    },
+    { 
       name: '订单',
       icon: '/assets/order-o.png',
       activeIcon: '/assets/order.png',

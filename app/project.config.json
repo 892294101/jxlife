@@ -46,15 +46,17 @@
       "outputPath": ""
     },
     "disableUseStrict": false,
-    "useCompilerPlugins": false
+    "useCompilerPlugins": false,
+    "condition": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.19.4",
-  "appid": "wx8cb7b0b879986f63",
+  "appid": "wx96e7320a87880da1",
   "projectname": "miniprogram-92",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "simulatorPluginLibVersion": {}
 }

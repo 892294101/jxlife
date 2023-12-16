@@ -10,7 +10,7 @@
       </el-form-item>
       <el-form-item prop="categoryId">
         <el-cascader v-model="query.categoryId"
-                     :options="categoryOption" @focus="getCategoryOption" placeholder="请选择" clearable/>
+                     :options="categoryOption" @focus="getCategoryOption" placeholder="请选择" clearable filterable/>
       </el-form-item>
       <el-form-item prop="status">
         <el-select v-model="query.status" placeholder="商品状态">
@@ -18,14 +18,17 @@
           <el-option label="未上架" value="2"></el-option>
         </el-select>
       </el-form-item>
+    </el-form>
+    <el-form style="display: flex; justify-content: flex-end;">
       <el-form-item>
         <el-button type="primary" :icon="Search" @click="getGoodsList">查询</el-button>
         <el-button type="primary" :icon="Brush" @click="resetForm('query')"/>
         <el-button type="primary" :icon="Plus" @click="add">商品</el-button>
       </el-form-item>
     </el-form>
+
     <!-- 商品列表 -->
-    <el-table :data="goodsList" height="65vh" style="width: 100%;">
+    <el-table :data="goodsList" height="57vh" style="width: 100%;">
       <el-table-column prop="name" label="商品名称" min-width="240">
         <template #default="scope">
           <div style="display: inline-flex;">
@@ -72,25 +75,25 @@
                          :icon="WarningFilled"
                          @confirm="deleteGoods(scope.row)">
             <template #reference>
-             <el-button size="small" type="danger" :icon="Delete"/>
+              <el-button size="small" type="danger" :icon="Delete"/>
             </template>
           </el-popconfirm>
         </template>
       </el-table-column>
       <template #empty>
         <div style="margin: 50px 0;">
-          <el-empty v-if="showEmpty" description="暂时还没有商品哦" />
+          <el-empty v-if="showEmpty" description="暂时还没有商品哦"/>
         </div>
       </template>
     </el-table>
     <div style="padding: 15px 0;">
       <el-pagination layout="total, prev, pager, next"
-                   :current-page="pageNum"
-                   :page-size="pageSize"
-                   :total="total"
-                   @current-change="handleCurrentChange"
-                   @prev-click="handleCurrentChangePrev"
-                   @next-click="handleCurrentChangeNext" background/>
+                     :current-page="pageNum"
+                     :page-size="pageSize"
+                     :total="total"
+                     @current-change="handleCurrentChange"
+                     @prev-click="handleCurrentChangePrev"
+                     @next-click="handleCurrentChangeNext" background/>
     </div>
     <!-- 添加、编辑商品，通用对话框 -->
     <el-dialog :title="dialogTitle" v-model="goodsDialogVisible" :lock-scroll="false" top="5vh" width="45%" @close="cancel">
@@ -119,7 +122,7 @@
           </el-input>
         </el-form-item>
         <el-form-item label="图片" prop="imageUrl">
-          <el-input v-show="false" v-model="goods.imageUrl" />
+          <el-input v-show="false" v-model="goods.imageUrl"/>
           <el-upload
               action="http://localhost:8000/web/upload"
               :headers="{'token': token}"
@@ -165,7 +168,7 @@ export default {
   },
   data() {
     return {
-
+      isDisabled: false,
       // 查询条件
       query: {
         id: '',
@@ -192,12 +195,12 @@ export default {
       },
 
       rules: {
-        categoryId: { required: true, message: '请选择一个类目', trigger: 'blur' },
-        title: { required: true, message: '请输入一个标题', trigger: 'blur' },
-        name: { required: true, message: '请输入一个名称', trigger: 'blur' },
-        price: [ {required: true, message: '价格不能为空', trigger: 'blur' },{type: 'number',message: '价格必须为数字', trigger: 'blur'}],
-        quantity: [ {required: true, message: '价格不能为空', trigger: 'blur' },{type: 'number',message: '价格必须为数字', trigger: 'blur'}],
-        imageUrl: { required: true, message: '至少上传一张图片', trigger: 'blur' },
+        categoryId: {required: true, message: '请选择一个类目', trigger: 'blur'},
+        title: {required: true, message: '请输入一个标题', trigger: 'blur'},
+        name: {required: true, message: '请输入一个名称', trigger: 'blur'},
+        price: [{required: true, message: '价格不能为空', trigger: 'blur'}, {type: 'number', message: '价格必须为数字', trigger: 'blur'}],
+        quantity: [{required: true, message: '价格不能为空', trigger: 'blur'}, {type: 'number', message: '价格必须为数字', trigger: 'blur'}],
+        imageUrl: {required: true, message: '至少上传一张图片', trigger: 'blur'},
       },
 
       // 图片列表
@@ -375,16 +378,16 @@ export default {
     // 删除商品
     deleteGoods(row) {
       this.$axios.delete('/goods/delete', {
-          params: {
-            id: row.id
-          }
-        }).then((response) => {
-          if (response.data.code === 200) {
-            ElMessage({message: response.data.message, type: 'success'})
-          }
-          this.getGoodsList()
-        }).catch((error) => {
-          console.log(error)
+        params: {
+          id: row.id
+        }
+      }).then((response) => {
+        if (response.data.code === 200) {
+          ElMessage({message: response.data.message, type: 'success'})
+        }
+        this.getGoodsList()
+      }).catch((error) => {
+        console.log(error)
       })
     },
 
@@ -392,9 +395,14 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields()
       switch (formName) {
-        case 'query': this.getGoodsList(); break;
-        case 'ruleForm': this.empty(); break;
-        default: console.log('invalid resetForm');
+        case 'query':
+          this.getGoodsList();
+          break;
+        case 'ruleForm':
+          this.empty();
+          break;
+        default:
+          console.log('invalid resetForm');
       }
     },
 
@@ -458,11 +466,12 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .el-dialog {
-    border-radius: 10px !important;
+  border-radius: 10px !important;
 }
 
-.el-upload{
+.el-upload {
   width: 100px;
   height: 100px;
   line-height: 100px;
@@ -474,21 +483,21 @@ export default {
   border: none;
 }
 
-.el-upload--picture-card{
+.el-upload--picture-card {
   width: 100px;
   height: 100px;
   margin-top: 0;
   font-size: 16px !important;
 }
 
-.el-upload-list--picture-card .el-upload-list__item{
+.el-upload-list--picture-card .el-upload-list__item {
   width: 100px;
   height: 100px;
   line-height: 100px;
   font-size: 16px;
 }
 
-.el-upload-list--picture-card .el-upload-list__item-thumbnail{
+.el-upload-list--picture-card .el-upload-list__item-thumbnail {
   width: 100px;
   height: 100px;
   line-height: 100px;

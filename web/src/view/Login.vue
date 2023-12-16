@@ -37,7 +37,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="footer">
+<!--    <div class="footer">
       <div>MIT License Copyright (c) 2022 zchengo</div>
       <div><el-divider direction="vertical" /></div>
       <a href="https://github.com/zchengo/imall">Github</a>
@@ -45,7 +45,7 @@
       <a href="https://www.zhihu.com/people/87-4-8-5">Zhihu</a>
       <div><el-divider direction="vertical" /></div>
       <a href="#">About</a>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
       show: true,
       loginForm: {
         username: 'admin',
-        password: '12345',
+        password: 'admin',
         captchaId: '',
         captchaValue: '',
       },

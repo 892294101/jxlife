@@ -5,17 +5,16 @@ import (
 	"github.com/892294101/jxlife/server/api"
 	"github.com/892294101/jxlife/server/global"
 	"github.com/892294101/jxlife/server/middleware"
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func Router() {
 
 	engine := gin.Default()
-
-	// 开启跨域
-	engine.Use(middleware.Cors())
+	engine.
+		// 开启跨域
+		engine.Use(middleware.Cors())
 
 	// 静态资源请求映射
 	engine.Static("/image", global.Config.Upload.SavePath)

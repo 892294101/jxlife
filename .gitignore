@@ -19,6 +19,6 @@
 
 # Go workspace file
 go.work
-server/main
-server/main
-server/main
+../jx/admin/server/main
+../jx/admin/server/main
+../jx/admin/server/main

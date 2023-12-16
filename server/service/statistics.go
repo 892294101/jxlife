@@ -27,7 +27,7 @@ func (s *WebStatisticsService) TodayData(param web.DataParam) web.TodayDate {
 	global.Db.Table("order").Where(ras, param.Sid, day).Find(&web.Order{}).Count(&orderDate.InDelivery)
 	global.Db.Table("order").Where(pds, param.Sid, day).Find(&web.Order{}).Count(&orderDate.Canceled)
 	global.Db.Table("order").Where(fds, param.Sid, day).Find(&web.Order{}).Count(&orderDate.Finished)
-	global.Db.Table("order").Where(pas, param.Sid, day).Pluck("sum(total_price) as pay_amount", &orderDate.PayAmount)
+	global.Db.Table("order").Where(pas, param.Sid, day).Pluck("IFNULL(sum(total_price),0) as pay_amount", &orderDate.PayAmount)
 	return orderDate
 }
 
